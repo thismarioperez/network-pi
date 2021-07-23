@@ -1,0 +1,50 @@
+version: "3.3"
+
+networks:
+    VLAN_pi-hole:
+        name: VLAN_pi-hole
+        driver: macvlan
+        driver_opts:
+            parent: eth0
+        ipam:
+            config:
+                - subnet: 192.168.1.1/24
+                - ip_range: 192.168.1.6/32
+                - gateway: 192.168.1.1
+services:
+    pi-hole:
+        container_name: pihole
+        image: pihole/pihole:latest
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /home/docker/pi-hole/config:/etc/pihole
+            - /home/docker/pi-hole/dnsmasq:/etc/dnsmasq.d
+        cap_add:
+            - NET_ADMIN
+        environment:
+            PIHOLE_DNS_: 1.1.1.1;1.0.0.1
+            ServerIP: 192.168.1.6
+            DNSMASQ_LISTENING: local
+            WEBPASSWORD: "PkB9VR@Hoxb-vb"
+            TZ: "US/Eastern"
+        networks:
+            VLAN_pi-hole:
+                ipv4_address: 192.168.1.6
+        mac_address: 02:42:c0:a8:01:d8
+        restart: always
+    rpi-monitor:
+        container_name: rpi-monitor
+        image: michaelmiklis/rpi-monitor:latest
+        devices:
+            - "/dev/vchiq"
+            - "/dev/vcsm-cma"
+        volumes:
+            - /opt/vc:/opt/vc
+            - /boot:/boot
+            - /sys:/dockerhost/sys:ro
+            - /etc:/dockerhost/etc:ro
+            - /proc:/dockerhost/proc:ro
+            - /usr/lib:/dockerhost/usr/lib:ro
+        ports:
+            - "8888:8888"
+        restart: always
