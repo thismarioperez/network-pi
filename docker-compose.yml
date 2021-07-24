@@ -23,13 +23,13 @@ services:
             - NET_ADMIN
         environment:
             PIHOLE_DNS_: 1.1.1.1;1.0.0.1
-            ServerIP: 192.168.1.6
+            ServerIP: 192.168.1.5
             DNSMASQ_LISTENING: local
             WEBPASSWORD: "PkB9VR@Hoxb-vb"
             TZ: "US/Eastern"
         networks:
             VLAN_pi-hole:
-                ipv4_address: 192.168.1.6
+                ipv4_address: 192.168.1.5
         mac_address: 02:42:c0:a8:01:d8
         restart: always
     rpi-monitor:
