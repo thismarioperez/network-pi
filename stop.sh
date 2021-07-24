@@ -1,3 +1,3 @@
 docker-compose down
-./networkDown.sh
+sh networkDown.sh
 exit 0;
