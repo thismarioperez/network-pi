@@ -14,7 +14,7 @@ envup() {
 
 networkUp() {
   if [ ! "$(docker network ls | grep VLAN_pi-hole)" ]; then
-    echo "Creating VLAN_pi-hole network ..."
+    echo "Creating network VLAN_pi-hole ..."
     docker network create \
       --driver=macvlan \
       --gateway=${LOCAL_NETWORK_GATEWAY} \
