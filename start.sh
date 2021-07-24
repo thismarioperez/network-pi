@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 envup() {
   local file=$([ -z "$1" ] && echo ".env" || echo ".env.$1")
 
@@ -11,7 +11,29 @@ envup() {
     return 1
   fi
 }
+
+networkUp() {
+  if [ ! "$(docker network ls | grep VLAN_pi-hole)" ]; then
+    echo "Creating VLAN_pi-hole network ..."
+    docker network create \
+      --driver=macvlan \
+      --gateway=${LOCAL_NETWORK_GATEWAY} \
+      --subnet=${LOCAL_NETWORK_SUBNET} \
+      --ip-range=${PIHOLE_STATIC_IP}/32 \
+      -o parent=eth0 \
+      VLAN_pi-hole
+  else
+    echo "VLAN_pi-hole network exists."
+  fi
+}
+
+# load environment
 envup
-sh networkUp.sh 
+
+# check that pi-hole network exists
+networkUp
+
+# build containers
 docker-compose up -d
-exit 0;
+
+exit 0

@@ -1,6 +1,6 @@
 Run this to make all scripts executable:
 ```
-chmod u+x networkDown.sh networkUp.sh start.sh stop.sh
+chmod u+x start.sh stop.sh
 ```
 
 To start everything run:

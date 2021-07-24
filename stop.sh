@@ -1,3 +1,3 @@
 docker-compose down
-sh networkDown.sh
+docker network rm VLAN_pi-hole
 exit 0;
