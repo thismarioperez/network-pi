@@ -1,5 +1,5 @@
 #!/bin/bash
-. .env
+source '.env'
 docker network create \
     --driver=macvlan \
     --gateway=${LOCAL_NETWORK_GATEWAY} \
