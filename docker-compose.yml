@@ -8,9 +8,9 @@ networks:
             parent: eth0
         ipam:
             config:
-                - subnet: 192.168.1.1/24
-                - ip_range: 192.168.1.6/32
-                - gateway: 192.168.1.1
+                - subnet: "192.168.1.1/24"
+                ip_range: "192.168.1.6/32"
+                gateway: "192.168.1.1"
 services:
     pi-hole:
         container_name: pihole
