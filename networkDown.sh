@@ -1,0 +1,1 @@
+docker network rm VLAN_pi-hole
