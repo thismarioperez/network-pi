@@ -22,7 +22,7 @@ services:
         networks:
             VLAN_pi-hole:
                 ipv4_address: ${PIHOLE_STATIC_IP}
-        mac_address: 02:42:c0:a8:01:d8
+        mac_address: ${PIHOLE_MAC_ADDRESS}
         restart: always
     rpi-monitor:
         container_name: rpi-monitor
