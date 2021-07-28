@@ -1,8 +1,5 @@
 version: "2.4"
 networks:
-    VLAN_heimdall:
-        external: true
-        name: VLAN_heimdall
     VLAN_pi-hole:
         external: true
         name: VLAN_pi-hole
@@ -16,10 +13,9 @@ services:
             PGID: ${PGID}
             PUID: ${PUID}
             TZ: US/Eastern
-        networks:
-            VLAN_pi-hole:
-                ipv4_address: ${HEIMDALL_STATIC_IP}
-        mac_address: ${HEIMDALL_MAC_ADDRESS}
+        ports:
+            5000:80
+            5001:433
     pi-hole:
         container_name: pihole
         image: pihole/pihole:latest

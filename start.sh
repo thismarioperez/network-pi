@@ -25,19 +25,6 @@ networkUp() {
   else
     echo "VLAN_pi-hole network exists."
   fi
-
-  if [ ! "$(docker network ls | grep VLAN_heimdall)" ]; then
-    echo "Creating network VLAN_heimdall ..."
-    docker network create \
-      --driver=macvlan \
-      --gateway=${LOCAL_NETWORK_GATEWAY} \
-      --subnet=${LOCAL_NETWORK_SUBNET} \
-      --ip-range=${HEIMDALL_STATIC_IP}/32 \
-      -o parent=eth0 \
-      VLAN_heimdall
-  else
-    echo "VLAN_heimdall network exists."
-  fi
 }
 
 # load environment
