@@ -7,15 +7,16 @@ services:
     heimdall:
         container_name: heimdall
         image: ghcr.io/linuxserver/heimdall
-        volumes: /home/docker/heimdall/config:/config
+        volumes: 
+            - /home/docker/heimdall/config:/config
         restart: always
         environment:
             PGID: ${PGID}
             PUID: ${PUID}
             TZ: US/Eastern
         ports:
-            5000:80
-            5001:433
+            - 5000:80
+            - 5001:433
     pi-hole:
         container_name: pihole
         image: pihole/pihole:latest
