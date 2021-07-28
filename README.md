@@ -33,6 +33,9 @@ PIHOLE_MAC_ADDRESS=02:42:c0:a8:01:d8
 PIHOLE_STATIC_IP=192.168.1.5
 # Configure a password to use to log in to the pi-hole service
 PIHOLE_WEBPASSWORD=REPLACE_ME
+# Configure user and group ids for heimdall
+PGID=1000
+PUID=1000
 ```
 
 Run this to make all scripts executable:
