@@ -3,16 +3,13 @@ A portable configuration of docker containers to deploy to a raspberry pi on you
 
 Requirements:
 - [Raspberry Pi 4](https://www.raspberrypi.org/products/raspberry-pi-4-model-b/)
-
 - [docker](https://docs.docker.com/engine/install/debian/)
-
 - [docker-compose](https://docs.docker.com/compose/install/#install-using-pip)
-
 - git. Easily install on raspberry pi with `sudo apt install git`
 
 ## Services this Installs
+- [heimdall](https://docs.linuxserver.io/images/docker-heimdall)
 - [pi-hole](https://docs.pi-hole.net/)
-
 - [rpi-monitor](https://xavierberger.github.io/RPi-Monitor-docs/index.html)
 ## Configuration
 Before running the start script in this project, you'll want to configure a static route on your router that will be used for the pi-hole service. You'll also want to generate a dummy mac address to assign to the pi-hole service.

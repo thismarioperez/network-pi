@@ -4,6 +4,18 @@ networks:
         external: true
         name: VLAN_pi-hole
 services:
+    heimdall:
+        container_name: heimdall
+        image: ghcr.io/linuxserver/heimdall
+        volumes: /home/docker/heimdall/config:/config
+        restart: always
+        environment:
+            PGID: ${PGID}
+            PUID: ${PUID}
+            TZ: US/Eastern
+        ports:
+            5000:80
+            5001:433
     pi-hole:
         container_name: pihole
         image: pihole/pihole:latest
@@ -17,8 +29,8 @@ services:
             PIHOLE_DNS_: 1.1.1.1;1.0.0.1
             ServerIP: ${PIHOLE_STATIC_IP}
             DNSMASQ_LISTENING: local
-            WEBPASSWORD: "${PIHOLE_WEBPASSWORD}"
-            TZ: "US/Eastern"
+            WEBPASSWORD: ${PIHOLE_WEBPASSWORD}
+            TZ: US/Eastern
         networks:
             VLAN_pi-hole:
                 ipv4_address: ${PIHOLE_STATIC_IP}
@@ -28,8 +40,8 @@ services:
         container_name: rpi-monitor
         image: michaelmiklis/rpi-monitor:latest
         devices:
-            - "/dev/vchiq"
-            - "/dev/vcsm-cma"
+            - /dev/vchiq
+            - /dev/vcsm-cma
         volumes:
             - /opt/vc:/opt/vc
             - /boot:/boot
@@ -38,5 +50,5 @@ services:
             - /proc:/dockerhost/proc:ro
             - /usr/lib:/dockerhost/usr/lib:ro
         ports:
-            - "8888:8888"
+            - 8888:8888
         restart: always
