@@ -10,11 +10,11 @@ Requirements:
 
 - git. Easily install on raspberry pi with `sudo apt install git`
 
-# Services this Installs
+## Services this Installs
 - [pi-hole](https://docs.pi-hole.net/)
 
 - [rpi-monitor](https://xavierberger.github.io/RPi-Monitor-docs/index.html)
-# Configuration
+## Configuration
 Before running the start script in this project, you'll want to configure a static route on your router that will be used for the pi-hole service. You'll also want to generate a dummy mac address to assign to the pi-hole service.
 
 This project creates a macvlan network with only 1 allowed ip address on it. This ip address will be a static address on your network that you can point your router or other devices to for dns filtering.
@@ -43,7 +43,7 @@ Run this to make all scripts executable:
 chmod u+x start.sh stop.sh
 ```
 
-# Start/Stop Containers
+## Start/Stop Containers
 To start everything run:
 ```
 ./start.sh
