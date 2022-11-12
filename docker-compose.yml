@@ -9,8 +9,8 @@ services:
         image: pihole/pihole:latest
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - /home/docker/pi-hole/config:/etc/pihole
-            - /home/docker/pi-hole/dnsmasq:/etc/dnsmasq.d
+            - /opt/pi-hole/config:/etc/pihole
+            - /opt/pi-hole/dnsmasq:/etc/dnsmasq.d
         cap_add:
             - NET_ADMIN
         environment:
@@ -19,6 +19,11 @@ services:
             DNSMASQ_LISTENING: local
             WEBPASSWORD: ${PIHOLE_WEBPASSWORD}
             TZ: US/Eastern
+        ports:
+            - "53:53/tcp"
+            - "53:53/udp"
+            - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
+            - "80:80/tcp"
         networks:
             VLAN_pi-hole:
                 ipv4_address: ${PIHOLE_STATIC_IP}
