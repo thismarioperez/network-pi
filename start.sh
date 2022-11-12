@@ -34,6 +34,6 @@ envup
 networkUp
 
 # build containers
-docker-compose up -d
+sudo docker compose up -d
 
 exit 0
